@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Big List</title>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="icon" type="image/png" href="./resources/images/logo/favicon.ico" />
+    <link rel="manifest" href="./manifest.webmanifest" crossorigin="use-credentials" />
+
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+    <meta name="apple-mobile-web-app-title" content="Tô Ferrado" />
+    <link rel="apple-touch-icon" sizes="72x72" href="./resources/images/logo/apple-icon-72x72.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="./resources/images/logo/apple-icon-120x120.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="./resources/images/logo/apple-icon-144x144.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="./resources/images/logo/apple-icon-152x152.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="./resources/images/logo/apple-icon-180x180.png" />
+
+    <link rel="stylesheet" href="./resources/framework/styles/styles.css" />
+    <link rel="stylesheet" type="text/css" href="./resources/styles/bigList.css" />
+    <script src="./resources/scripts/bigList.js"></script>
+    <script>
+        navigator.serviceWorker.register("./bigList-sw.js");
+    </script>
+</head>
+
+<body>
+    <header class="headerBar">
+        <div class="appName">Big List</div>
+        <div id="badge" class="badge success">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M11 6a3 3 0 1 1-6 0 3 3 0 0 1 6 0z" />
+                <path fill-rule="evenodd"
+                    d="M0 8a8 8 0 1 1 16 0A8 8 0 0 1 0 8zm8-7a7 7 0 0 0-5.468 11.37C3.242 11.226 4.805 10 8 10s4.757 1.225 5.468 2.37A7 7 0 0 0 8 1z" />
+            </svg>
+        </div>
+    </header>
+
+    <nav class="navBar bottom">
+        <div class="buttonGroup">
+            <button id="tab1" class="button active">Itens</button>
+            <button id="tab2" class="button">Relatório</button>
+        </div>
+    </nav>
+
+    <div id="screen1">
+        <div class="componentHeader">
+            <h1 class="componentTitle">Itens</h1>
+            <button id="btn-add-item" class="button primary">
+                <img src="./resources/images/plus1.png" />
+            </button>
+        </div>
+
+        <div class="componentContent">
+            <div class="buttonGroup center mt1">
+                <button id="menu-sort" class="button light menu-sort">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                        viewBox="0 0 16 16">
+                        <path fill-rule="evenodd"
+                            d="M10.082 5.629 9.664 7H8.598l1.789-5.332h1.234L13.402 7h-1.12l-.419-1.371h-1.781zm1.57-.785L11 2.687h-.047l-.652 2.157h1.351z" />
+                        <path
+                            d="M12.96 14H9.028v-.691l2.579-3.72v-.054H9.098v-.867h3.785v.691l-2.567 3.72v.054h2.645V14zM4.5 2.5a.5.5 0 0 0-1 0v9.793l-1.146-1.147a.5.5 0 0 0-.708.708l2 1.999.007.007a.497.497 0 0 0 .7-.006l2-2a.5.5 0 0 0-.707-.708L4.5 12.293V2.5z" />
+                    </svg>
+                </button>
+                <button id="menu-categories" class="button dark thrid">Categorias</button>
+                <button id="menu-products" class="button light thrid">Produtos</button>
+                <button id="menu-filter" class="button light menu-filter">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="25" height="25" fill="currentColor"
+                        class="bi bi-filter" viewBox="0 0 16 16">
+                        <path
+                            d="M6 10.5a.5.5 0 0 1 .5-.5h3a.5.5 0 0 1 0 1h-3a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z" />
+                    </svg>
+                </button>
+            </div>
+
+            <div id="blank" class="hidden">
+                <img src="./resources/images/empty-list.png" />
+                <p>Nenhum item cadastrado!</p>
+            </div>
+            <ul id="main-list-itens" class="list mt2">
+                <!--Itens-->
+            </ul>
+        </div>
+    </div>
+
+    <div id="screen2" class="hidden">
+        <div class="componentHeader">
+            <h1 class="componentTitle">Inventário por Categoria</h1>
+        </div>
+
+        <div class="componentContent">
+            <table id="table-inventory" class="table mt1">
+                <thead>
+                    <tr>
+                        <th>Categoria</th>
+                        <th>Qtde Produtos</th>
+                        <th>Valor</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!--Table lines-->
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div id="screen3" class="hidden">
+        <div class="componentHeader">
+            <h1 class="componentTitle">Filtrar</h1>
+            <button id="btn-confirm-filter" class="success filter-check">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 16 16">
+                    <path
+                        d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="componentContent">
+            <ul id="filter-list-itens" class="list select mt2">
+                <li id="1-filter-list-item">Produtos vencidos</li>
+                <li id="2-filter-list-item">Produtos próximos ao vencimento</li>
+                <li id="3-filter-list-item">Produtos sem estoque</li>
+            </ul>
+        </div>
+    </div>
+
+    <div id="screen4" class="hidden">
+        <div class="componentHeader">
+            <h1 class="componentTitle">Adicionar Categoria</h1>
+        </div>
+
+        <div class="componentContent">
+            <form id="form-category" name="category" onsubmit="return false;">
+                <div class="field mt1">
+                    <label for="categ-name" class="fifth">Nome:</label>
+                    <input id="categ-name" type="text" />
+                </div>
+                <div class="field mt1">
+                    <label for="categ-color" class="fifth">Cor:</label>
+                    <select id="categ-color">
+                        <option value="">Selecione...</option>
+                        <option value="blue">Azul</option>
+                        <option value="pink">Rosa</option>
+                        <option value="green">Verde</option>
+                        <option value="red">Vermelho</option>
+                        <option value="yellow">Amarelo</option>
+                        <option value="black">Preto</option>
+                        <option value="purple">Roxo</option>
+                    </select>
+                </div>
+                <div class="buttonGroup mt1 end">
+                    <button type="button" id="btn-cancel-category" class="button quarter light">Cancel</button>
+                    <button type="button" id="btn-save-category" class="button primary quarter">Salvar</button>
+                </div>
+                <div class="buttonGroup end mt2">
+                    <button type="button" id="btn-delete-category" class="button quarter danger">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="screen5" class="hidden">
+        <div class="componentHeader">
+            <h1 class="componentTitle">Adicionar Produto</h1>
+        </div>
+
+        <div class="componentContent">
+            <form id="form-product" name="product" onsubmit="return false;">
+                <div class="field mt1">
+                    <label for="prod-name" class="fifth">Nome:</label>
+                    <input id="prod-name" type="text" />
+                </div>
+                <div class="field mt1">
+                    <label for="prod-price" class="fifth">Preço:</label>
+                    <input id="prod-price" type="number" />
+                </div>
+                <div class="field mt1">
+                    <label for="prod-valid" class="fifth">Vencimento:</label>
+                    <input id="prod-valid" type="date" />
+                </div>
+                <div class="field mt1">
+                    <label for="prod-stored" class="fifth">Qtde Estoque:</label>
+                    <input id="prod-stored" type="number" />
+                </div>
+                <div class="field mt1">
+                    <label for="prod-categ" class="fifth">Categoria:</label>
+                    <select id="prod-categ">
+                        <option value="">Selecione...</option>
+                    </select>
+                </div>
+                <div class="buttonGroup mt1 end">
+                    <button type="button" id="btn-cancel-product" class="button quarter light">Cancel</button>
+                    <button type="button" id="btn-save-product" class="button primary quarter">Salvar</button>
+                </div>
+                <div class="buttonGroup delete end mt2">
+                    <button type="button" id="btn-delete-product" class="button quarter danger">Delete</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div id="screen6" class="hidden">
+        <div class="componentHeader">
+            <h1 id="title-sort" class="componentTitle">Ordernar Produto/ Categoria</h1>
+            <button id="btn-confirm-sort" class="success filter-check">
+                <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" fill="currentColor" viewBox="0 0 16 16">
+                    <path
+                        d="M13.854 3.646a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708 0l-3.5-3.5a.5.5 0 1 1 .708-.708L6.5 10.293l6.646-6.647a.5.5 0 0 1 .708 0z" />
+                </svg>
+            </button>
+        </div>
+
+        <div class="componentContent">
+            <ul id="sort-list-itens" class="list select mt2">
+                <li id="1-sort-list-item" data-menu="product">Ordem alfabética</li>
+                <li id="2-sort-list-item" data-menu="product">Vencimento de produtos</li>
+                <li id="3-sort-list-item" data-menu="product">Produtos com maior estoque </li>
+                <li id="4-sort-list-item" data-menu="category">Ordem alfabética</li>
+                <li id="5-sort-list-item" data-menu="category">Categorias de maior valor</li>
+            </ul>
+        </div>
+    </div>
+</body>
+
+</html>

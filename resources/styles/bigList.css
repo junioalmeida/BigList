@@ -1,0 +1,121 @@
+:root {
+    --blue-category: #85a3e0;
+    --pink-category: #ff66ff;
+    --green-category: #66ff66;
+    --red-category: #ff4d4d;
+    --yellow-category: #ffff33;
+    --black-category: #003300;
+    --purple-category: #d633ff;
+}
+
+header div.badge{
+    height: 2rem;
+    min-width: 2rem;
+    border-radius: 1rem;
+}
+
+.buttonGroup.center {
+    justify-content: center;
+    align-items: center;
+}
+
+.buttonGroup button.menu-sort{
+    flex-grow: 0.05;
+    margin-right: auto;
+}
+
+.buttonGroup button.menu-filter {
+    flex-grow: 0.05;
+    margin-left: auto;
+}
+
+button[disabled].button.light:active{
+    background: #edf6f9;
+    border: thin solid #dce5e8;
+}
+
+.componentContent:last-child {
+    margin-bottom: 4rem;
+}
+
+.list .div-color.blue {
+    background-color: var(--blue-category);
+}
+
+.list .div-color.pink {
+    background-color: var(--pink-category);
+}
+
+.list .div-color.green {
+    background-color: var(--green-category);
+}
+
+.list .div-color.red {
+    background-color: var(--red-category);
+}
+
+.list .div-color.yellow {
+    background-color: var(--yellow-category);
+}
+
+.list .div-color.black {
+    background-color: var(--black-category);
+}
+
+.list .div-color.purple {
+    background-color: var(--purple-category);
+}
+
+.list .div-color {
+    height: 3rem;
+    width: 1rem;
+    border-radius: 0.35rem 0 0 0.35rem;
+}
+
+.list li:has(div) {
+    padding: 0;
+}
+
+.list li .list-item {
+    display: flex;
+    flex-direction: row;
+    justify-content: left;
+    align-items: center;
+}
+
+.list li .list-item .div-content {
+    padding: 0 1rem 0 1rem;
+}
+
+.list li:not(:last-child) {
+    margin-bottom: 0.25rem;
+}
+
+.list.select li.selected {
+    background: #cbd4d7;
+    border: thin solid #bac3c6;
+}
+
+.filter-check {
+    border-radius: 0.35rem;
+    height: 2.5rem;
+    min-width: 3rem;
+    line-height: 1rem;
+    padding: 0.25rem 0.75rem;
+    border-radius: 0.5rem;
+}
+
+#blank {
+    padding-top: 5rem;
+    opacity: 0.25;
+    width: 100%;
+    text-align: center;
+}
+
+#blank * {
+    text-align: center;
+}
+
+#blank img {
+    height: 12rem;
+}
